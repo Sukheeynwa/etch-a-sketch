@@ -1,0 +1,30 @@
+#container {
+    box-sizing: border-box;
+    background-color: black;
+    width: 480px;
+    height: 480px;
+    display: flex;
+}
+
+#vertical {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#horizontal {
+    display: flex;
+    flex: 1;
+}
+
+#div {
+    background-color: white;
+    height: auto;
+    width: auto;
+    border: solid black 0.1px;
+    flex: 1;
+}
+
+#div:hover {
+    background-color: red;
+}
