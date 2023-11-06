@@ -1,15 +1,14 @@
 let horizontal = document.querySelector("#horizontal");
 let vertical = document.querySelector("#vertical")
 
-let verticalGrid = 16;
-let horizontalGrid = 16;
+let grid = 16;
 
-for (let i = 1; i <= verticalGrid; i++) {
+for (let i = 1; i <= grid; i++) {
     let i = document.createElement("div");
     i.setAttribute("id", "horizontal");
     vertical.append(i);
 
-    for (let j = 1; j <= horizontalGrid; j++) {
+    for (let j = 1; j <= grid; j++) {
         let j = document.createElement("div");
         j.setAttribute("id", "div");
         i.appendChild(j);
@@ -18,17 +17,25 @@ for (let i = 1; i <= verticalGrid; i++) {
 
 let div = document.querySelectorAll("#div")
 
+let drag = false; 
 
-div.forEach((div) => {
-    div.addEventListener("mousedown", (e) => {
-        div.style.backgroundColor = "coral";
-        console.log(e.type)
-    })
-}) 
+function changeColor(color) {
+    div.forEach((div) => {
+        div.addEventListener('mousedown', (e) => {
+            drag = true
+        }); 
+    
+        div.addEventListener('mouseup', (e) => {
+            drag = false
+        });
+    
+        div.addEventListener("mousemove", (e) => {
+            if (drag === true) {
+                div.style.backgroundColor = color;
+            }
+        });
+    }
+    );
+}
 
-div.forEach((div) => {
-    div.addEventListener("mouseup", (e) => {
-        div.style.backgroundColor = "teal";
-        console.log(e.type)
-    })
-}) 
+changeColor("yellow")
