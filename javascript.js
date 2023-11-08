@@ -1,7 +1,7 @@
 let horizontal = document.querySelector("#horizontal");
 let vertical = document.querySelector("#vertical")
 
-let grid = 16;
+let grid = 32;
 
 for (let i = 1; i <= grid; i++) {
     let i = document.createElement("div");
@@ -16,12 +16,20 @@ for (let i = 1; i <= grid; i++) {
 };
 
 let div = document.querySelectorAll("#div")
-
 let drag = false; 
 
-function changeColor(color) {
+let myOpacity = 0;
+let red = 0;
+let green = 0;
+let blue = 0;
+
+myOpacity = 0;
+
+function changeColor() {
     div.forEach((div) => {
         div.addEventListener('mousedown', (e) => {
+            div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
             drag = true
         }); 
     
@@ -31,11 +39,12 @@ function changeColor(color) {
     
         div.addEventListener("mousemove", (e) => {
             if (drag === true) {
-                div.style.backgroundColor = color;
+                div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+                div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
             }
         });
     }
     );
-}
+};
 
-changeColor("yellow")
+changeColor()

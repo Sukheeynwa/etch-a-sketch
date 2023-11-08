@@ -1,6 +1,5 @@
 #container {
     box-sizing: border-box;
-    background-color: black;
     width: 480px;
     height: 480px;
     display: flex;
@@ -26,5 +25,5 @@
 }
 
 #div:hover {
-    background-color: red;
+    background-color: coral;
 }
