@@ -2,23 +2,26 @@ let horizontal = document.querySelector("#horizontal");
 let container = document.querySelector("#container");
 let gridPicker = document.querySelector("#grid-picker");
 let opacityPicker = document.querySelector("#opacity-picker");
-let btn = document.querySelector("#reset-btn")
+let colorPicker = document.getElementById("color-picker");
+let eraserBtn = document.querySelector("#eraser-btn");
+let clearBtn = document.querySelector("#reset-btn")
+let colorBtn = document.querySelector("#color-btn")
+let div = document.querySelectorAll("#div")
 
-let myOpacity = 1;
-let grid = 16;
+let defaultColor = "#000000"
+let defaultOpacity = 1;
+let defaultGrid = 16;
+let drag = false; 
 
-let red = 120;
-let green = 120;
-let blue = 255;
 
 function draw() {
     let div = document.querySelectorAll("#div")
-    let drag = false; 
 
+    // Mouse event listeners
     div.forEach((div) => {
         div.addEventListener('mousedown', (e) => {
-            div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
-            div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
+            div.style.backgroundColor = defaultColor;
+            div.style.opacity = Number(div.style.opacity || defaultOpacity) + 0.1;
             drag = true
         }); 
 
@@ -28,18 +31,53 @@ function draw() {
 
         div.addEventListener("mousemove", (e) => {
             if (drag === true) {
-                div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
-                div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
+                div.style.backgroundColor = defaultColor;
+                div.style.opacity = Number(div.style.opacity || defaultOpacity) + 0.1;
             }
         });
     }
     );
 
-    btn.addEventListener("click", () => {
-        div.forEach((div) => {
-            div.style.backgroundColor = ""
-        })
-    })
+    // Change html text
+    let gridSizeContainer = document.querySelector("#grid-size-container");
+    let gridSize = document.createElement("h4");
+    gridSize.textContent = `Grid size: ${defaultGrid} x ${defaultGrid}`;
+    while(gridSizeContainer.firstChild) {
+        gridSizeContainer.removeChild(gridSizeContainer.firstChild);
+    };
+    gridSizeContainer.appendChild(gridSize);
+
+    let opacityContainer = document.querySelector("#opacity-picker-container");
+    let opacitySize = document.createElement("h4");
+    opacitySize.textContent = `Opacity: ${Math.round(defaultOpacity * 100)}`;
+    while(opacityContainer.firstChild) {
+        opacityContainer.removeChild(opacityContainer.firstChild);
+    };
+    opacityContainer.appendChild(opacitySize);
+};
+
+function eraser() {
+    let div = document.querySelectorAll("#div")
+
+    div.forEach((div) => {
+        div.addEventListener('mousedown', (e) => {
+            div.style.backgroundColor = "white"
+            div.style.opacity = Number(div.style.opacity || 0);
+            drag = true
+        }); 
+
+        div.addEventListener('mouseup', (e) => {
+            drag = false
+        });
+
+        div.addEventListener("mousemove", (e) => {
+            if (drag === true) {
+                div.style.backgroundColor = "white"
+                div.style.opacity = Number(div.style.opacity || 0);
+            }
+        });
+    }
+    );
 };
 
 function createGrid() {
@@ -51,13 +89,13 @@ function createGrid() {
     vertical.setAttribute("id", "vertical")
     container.appendChild(vertical);
 
-    for (let i = 1; i <= grid; i++) {
+    for (let i = 1; i <= defaultGrid; i++) {
 
         let i = document.createElement("div");
         i.setAttribute("id", "horizontal");
         vertical.append(i);
     
-        for (let j = 1; j <= grid; j++) {
+        for (let j = 1; j <= defaultGrid; j++) {
             let j = document.createElement("div");
             j.setAttribute("id", "div");
             i.appendChild(j);
@@ -66,65 +104,47 @@ function createGrid() {
     draw();
 };
 
-createGrid()
+createGrid();
 
-
-
+// Grid picker event listener
 gridPicker.addEventListener("input", () => {
-    grid = Number(gridPicker.value);
+    defaultGrid = Number(gridPicker.value);
     createGrid();
+
+    let gridSizeContainer = document.querySelector("#grid-size-container");
+    let gridSize = document.createElement("h4");
+    gridSize.textContent = `Grid size: ${defaultGrid} x ${defaultGrid}`;
+    while(gridSizeContainer.firstChild) {
+        gridSizeContainer.removeChild(gridSizeContainer.firstChild);
+    };
+    gridSizeContainer.appendChild(gridSize);
 });
 
+// Opacity picker event listener
 opacityPicker.addEventListener("input", () => {
-    myOpacity = Number(opacityPicker.value) / 100;
+    defaultOpacity = Number(opacityPicker.value) / 100;
+
+    let opacityContainer = document.querySelector("#opacity-picker-container");
+    let opacitySize = document.createElement("h4");
+    opacitySize.textContent = `Opacity: ${Math.round(defaultOpacity * 100)}`;
+    while(opacityContainer.firstChild) {
+        opacityContainer.removeChild(opacityContainer.firstChild);
+    };
+    opacityContainer.appendChild(opacitySize);
 });
 
-let redValue = document.querySelector("#red-picker")
-let greenValue = document.querySelector("#green-picker")
-let blueValue = document.querySelector("#blue-picker")
+// Color picker event listener
+colorPicker.addEventListener("input", function() {
+    defaultColor = colorPicker.value;
+});
 
-redValue.addEventListener("input", () => {
-    red = Number(redValue.value)
-})
+// Eraser event listener
+eraserBtn.addEventListener("click", eraser);
 
-greenValue.addEventListener("input", () => {
-    green = Number(greenValue.value)
-})
+// Color event listener
+colorBtn.addEventListener("click", () => {
+    draw();
+});
 
-blueValue.addEventListener("input", () => {
-    blue = Number(blueValue.value)
-})
-
-function eraser() {
-    let div = document.querySelectorAll("#div")
-    let drag = false; 
-
-    div.forEach((div) => {
-        div.addEventListener('mousedown', (e) => {
-            div.style.backgroundColor = "white"
-            div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
-            drag = true
-        }); 
-
-        div.addEventListener('mouseup', (e) => {
-            drag = false
-        });
-
-        div.addEventListener("mousemove", (e) => {
-            if (drag === true) {
-                div.style.backgroundColor = "white"
-                div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
-            }
-        });
-    }
-    );
-
-    btn.addEventListener("click", () => {
-        div.forEach((div) => {
-            div.style.backgroundColor = ""
-        })
-    })
-};
-
-let myEraser = document.querySelector("#eraser-btn");
-myEraser.addEventListener("click", eraser)
+// Clear event listener
+clearBtn.addEventListener("click", createGrid);

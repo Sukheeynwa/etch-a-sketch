@@ -1,8 +1,14 @@
+* {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 200;
+}
+
 #container {
     box-sizing: border-box;
     width: 480px;
     height: 480px;
     display: flex;
+    border: solid black 0.1px;
 }
 
 #vertical,
@@ -21,10 +27,11 @@
     background-color: white;
     height: auto;
     width: auto;
-    border: solid black 0.1px;
+    border: solid black 0.01px;
     flex: 1;
 }
 
 #div:hover {
     background-color: coral;
 }
+
