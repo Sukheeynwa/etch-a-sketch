@@ -1,14 +1,71 @@
 * {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: 200;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
+}
+
+h1 {
+    margin-top: 40px;
+}
+
+#picker {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+}
+
+#buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+#buttons div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border: none;
+    height: 25px;
+    width: 80px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button:hover {
+    scale: 110%;
+    cursor: pointer;
+}
+
+button:active {
+    scale: 90%;
+    cursor: pointer;
+}
+
+#grid-container,
+#opacity-container {
+    display: inline-block;
 }
 
 #container {
     box-sizing: border-box;
-    width: 480px;
-    height: 480px;
+    width: 600px;
+    height: 600px;
     display: flex;
-    border: solid black 0.1px;
+    border: solid black 5px;
+    margin: auto;
+    margin-top: 40px;
 }
 
 #vertical,
@@ -33,5 +90,5 @@
 
 #div:hover {
     background-color: coral;
+    cursor: pointer;
 }
-

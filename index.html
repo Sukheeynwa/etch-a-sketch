@@ -7,25 +7,31 @@
 </head>
 <body>
     <h1>Etch a Sketch</h1>
-
-    <h3 id="grid-size-container"></h3>
-    <input type="range" id="grid-picker" min="8" max="32" step="1" value="16">
-
-    <h3 id="opacity-picker-container"></h3>
-    <input type="range" id="opacity-picker" min="0" max="100" step="1" value="100">
-
-    <label for="color-picker">Select a color:</label>
-    <input id="color-picker" type="color">
-
-    <button id = "reset-btn">Clear</button>
-    <button id = "eraser-btn">Eraser</button>
-    <button id = "color-btn">Brush</button>
-
+    <div id="sidebar">
+        <div id = "buttons">
+            <div>
+                <label for="color-picker">Select a color:</label>
+                <input id="color-picker" type="color">
+            </div>
+            <button id = "color-btn">Brush</button>
+            <button id = "eraser-btn">Eraser</button>
+            <button id = "reset-btn">Clear</button>
+        </div>
+        <div id = "picker">
+            <div id = "grid-container">
+                <h3 id="grid-size-container"></h3>
+                <input type="range" id="grid-picker" min="8" max="32" step="1" value="16">
+            </div>
+            <div id = "opacity-container">
+                <h3 id="opacity-picker-container"></h3>
+                <input type="range" id="opacity-picker" min="0" max="100" step="1" value="100">
+            </div>
+        </div>
+    </div>
     <div id = "container">
         <div id = "vertical"></div>
     </div>
-    <div id = "rgb-container"></div>
+
     <script src="javascript.js" defer></script>
-   
 </body>
 </html>
