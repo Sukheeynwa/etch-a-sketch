@@ -7,8 +7,20 @@
 </head>
 <body>
     <h1>Etch a Sketch</h1>
-    <input type="range" id="grid-picker" min="0" max="32" step="1" value="32">
-    <button>Reset</button>
+    <h3>Grid picker</h3>
+    <input type="range" id="grid-picker" min="8" max="32" step="1" value="16">
+    <h3>Opacity picker</h3>
+    <input type="range" id="opacity-picker" min="0" max="100" step="1" value="100">
+    <h3>Color picker</h3>
+    <h4>Red value</h2>
+    <input type="range" id="red-picker" min="0" max="255" step="1" value="255">
+    <h4>Green value</h2>
+    <input type="range" id="green-picker" min="0" max="255" step="1" value="255">
+    <h4>Blue value</h2>
+    <input type="range" id="blue-picker" min="0" max="255" step="1" value="255">
+
+    <button id = "reset-btn">Reset</button>
+    <button id = "eraser-btn">Eraser</button>
     <div id = "container">
         <div id = "vertical">
         </div>

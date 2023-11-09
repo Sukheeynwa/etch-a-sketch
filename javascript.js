@@ -1,20 +1,48 @@
 let horizontal = document.querySelector("#horizontal");
+let container = document.querySelector("#container");
+let gridPicker = document.querySelector("#grid-picker");
+let opacityPicker = document.querySelector("#opacity-picker");
+let btn = document.querySelector("#reset-btn")
 
-let myOpacity = 0;
+let myOpacity = 1;
+let grid = 16;
+
 let red = 120;
 let green = 120;
 let blue = 255;
-myOpacity = 0.1;
 
-let gridPicker = document.querySelector("#grid-picker")
+function draw() {
+    let div = document.querySelectorAll("#div")
+    let drag = false; 
 
-gridPicker.addEventListener("input", () => {
+    div.forEach((div) => {
+        div.addEventListener('mousedown', (e) => {
+            div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
+            drag = true
+        }); 
 
-    grid = Number(gridPicker.value);
-    console.log(grid)
+        div.addEventListener('mouseup', (e) => {
+            drag = false
+        });
 
-    const container = document.querySelector("#container")
+        div.addEventListener("mousemove", (e) => {
+            if (drag === true) {
+                div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+                div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
+            }
+        });
+    }
+    );
 
+    btn.addEventListener("click", () => {
+        div.forEach((div) => {
+            div.style.backgroundColor = ""
+        })
+    })
+};
+
+function createGrid() {
     while(container.firstChild) {
         container.removeChild(container.firstChild)
     }
@@ -35,21 +63,47 @@ gridPicker.addEventListener("input", () => {
             i.appendChild(j);
         };  
     };
-    
-    
+    draw();
+};
 
-    draw()
+createGrid()
+
+
+
+gridPicker.addEventListener("input", () => {
+    grid = Number(gridPicker.value);
+    createGrid();
+});
+
+opacityPicker.addEventListener("input", () => {
+    myOpacity = Number(opacityPicker.value) / 100;
+});
+
+let redValue = document.querySelector("#red-picker")
+let greenValue = document.querySelector("#green-picker")
+let blueValue = document.querySelector("#blue-picker")
+
+redValue.addEventListener("input", () => {
+    red = Number(redValue.value)
 })
 
-function draw() {
+greenValue.addEventListener("input", () => {
+    green = Number(greenValue.value)
+})
+
+blueValue.addEventListener("input", () => {
+    blue = Number(blueValue.value)
+})
+
+function eraser() {
     let div = document.querySelectorAll("#div")
     let drag = false; 
+
     div.forEach((div) => {
         div.addEventListener('mousedown', (e) => {
-            div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            div.style.backgroundColor = "white"
             div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
             drag = true
-            console.log(e.type)
         }); 
 
         div.addEventListener('mouseup', (e) => {
@@ -58,21 +112,19 @@ function draw() {
 
         div.addEventListener("mousemove", (e) => {
             if (drag === true) {
-                div.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+                div.style.backgroundColor = "white"
                 div.style.opacity = Number(div.style.opacity || myOpacity) + 0.1;
-                console.log(e.type)
             }
         });
     }
     );
-}
 
+    btn.addEventListener("click", () => {
+        div.forEach((div) => {
+            div.style.backgroundColor = ""
+        })
+    })
+};
 
-
-
-
-
-
-
-
-
+let myEraser = document.querySelector("#eraser-btn");
+myEraser.addEventListener("click", eraser)
